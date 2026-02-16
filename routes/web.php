@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 #comment 
 #hello
 #good morning
+#hi
 
 Auth::routes();
 
