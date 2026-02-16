@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
 #comment 
 #hello
+#hi
 
 Auth::routes();
 
