@@ -4,8 +4,129 @@
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@variant dark (&:where(.dark, .dark *));
 
-@theme {
+@theme 
+{
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* instagram logo  */
+.logo-font 
+{
+    font-family: 'Grand Hotel', cursive;
+    font-size: 2.2rem; 
+    letter-spacing: 1px;
+}
+
+   /* dark/white mode */
+body.dark-mode 
+{
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .bg-white,
+.dark-mode .card,
+.dark-mode .navbar,
+.dark-mode .dropdown-menu,
+.dark-mode .modal-content,
+.dark-mode .list-group-item 
+{
+    background-color: #262626 !important;
+    border-color: #3a3a3a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .text-dark,
+.dark-mode .text-secondary,
+.dark-mode .text-muted,
+.dark-mode a,
+.dark-mode p,
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5 
+{
+    color: #ffffff !important;
+}
+
+.dark-mode i 
+{
+    color: #ffffff !important;
+}
+
+.dark-mode .form-control
+{
+    background-color: #121212 !important;
+    color: #ffffff !important;
+    border: 1px solid #3a3a3a !important;
+}
+.dark-mode .form-control::placeholder 
+{
+    color: #aaaaaa !important;
+}
+
+.dark-mode .table,
+.dark-mode .table th,
+.dark-mode .table td 
+{
+    background-color: #262626 !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+}
+
+.dark-mode th,
+.dark-mode td 
+{
+    background-color: #1e3b2b !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+}
+
+/* insta icon */
+.insta-icon 
+{
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-size: 50px; 
+}
+
+/* tab post/like */
+.profile-tabs {
+    border-bottom: 1px solid #dbdbdb !important; 
+}
+
+.profile-tabs .nav-link {
+    border: none !important; 
+    border-radius: 0 !important;
+    color: #8e8e8e !important; 
+    font-weight: 600;
+    font-size: 0.75rem; 
+    letter-spacing: 1px;
+    padding: 15px 0; 
+    margin: 0 25px; 
+    margin-bottom: -1px !important; 
+    background-color: transparent !important;
+}
+
+.profile-tabs .nav-link.active {
+    color: #262626 !important; 
+    border-top: none !important; 
+    border-bottom: 1px solid #262626 !important; 
+}
+
+.profile-tabs .nav-link i {
+    font-size: 0.85rem;
+}
+
+body.dark-mode .profile-tabs {
+    border-bottom: 1px solid #3a3a3a !important; 
+}
+
+body.dark-mode .profile-tabs .nav-link.active {
+    color: #ffffff !important;
+    border-top: none !important;
+    border-bottom: 1px solid #ffffff !important; 
 }

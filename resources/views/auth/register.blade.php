@@ -64,12 +64,19 @@
                         </div>
 
                         <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-4 align-items-center justify-content-between">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
+                         <p class="mb-0 small text-end">
+                                {{ __('Already have an account?') }} 
+                                <a href="{{ route('login') }}" class="text-decoration-none">
+                                    {{ __('Login here') }}
+                                </a>
+                            </p>
                     </form>
                 </div>
             </div>
