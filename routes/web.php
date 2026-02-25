@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\MessageController;
 #Admin
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
@@ -69,5 +70,10 @@ Route::group(['middleware' => 'auth'], function()
     #FOLLOW
     Route::post('/follow/{user_id}/store', [FollowController::class, 'store'])->name('follow.store');
     Route::delete('/follow/{user_id}/destroy', [FollowController::class, 'destroy'])->name('follow.destroy');
+
+    # DM
+    Route::get('/message/inbox', [MessageController::class, 'inbox'])->name('message.inbox');
+    Route::get('/message/{id}', [MessageController::class, 'index'])->name('message.index');
+    Route::post('/message/store/{id}', [MessageController::class, 'store'])->name('message.store');
 
 });

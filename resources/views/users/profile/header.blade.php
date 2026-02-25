@@ -60,4 +60,6 @@
 
         <p class="fw-bold">{{ $user->introduction }}</p>
     </div>
+
+    
 </div>
