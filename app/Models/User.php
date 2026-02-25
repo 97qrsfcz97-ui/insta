@@ -83,4 +83,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+
+    #Get all stories posted by this user, ordered by newest first
+    public function stories()
+    {
+        return $this->hasMany(Story::class)->latest();
+    }
+
+    #Returns TRUE if this user has any active stories (posted within the last 24 hours)
+    public function hasActiveStories()
+    {
+        return $this->stories()->active()->exists();
+    }
 }

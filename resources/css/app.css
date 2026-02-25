@@ -130,3 +130,213 @@ body.dark-mode .profile-tabs .nav-link.active {
     border-top: none !important;
     border-bottom: 1px solid #ffffff !important; 
 }
+
+/* navbar fixed */
+body {
+    padding-top: 100px; /* navbarの高さ分だけ空ける */
+}
+
+/* ============================================
+   Stories Thumbnail Strip
+   ============================================ */
+
+/* Hide scrollbar while keeping scroll functionality */
+.story-thumbnail-strip {
+    scrollbar-width: none;
+}
+.story-thumbnail-strip::-webkit-scrollbar {
+    display: none;
+}
+
+/* Story avatar wrapper */
+.story-avatar-item {
+    flex-shrink: 0;
+}
+
+/* Active (unviewed) ring: Instagram gradient border */
+.story-ring-active {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+/* Viewed ring: gray border */
+.story-ring-viewed {
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    padding: 3px;
+    background: #dbdbdb;
+}
+
+/* Inner white gap between ring and avatar */
+.story-ring-active::after,
+.story-ring-viewed::after {
+    content: none;
+}
+
+.story-avatar-img,
+.story-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    border: 3px solid #ffffff;
+    object-fit: cover;
+}
+
+.story-avatar-placeholder {
+    background-color: #efefef;
+}
+
+.story-avatar-icon {
+    font-size: 54px;
+}
+
+.story-avatar-name {
+    font-size: 0.72rem;
+    color: #262626;
+}
+
+/* Dark mode adjustments for stories thumbnail */
+body.dark-mode .story-ring-viewed {
+    background: #555555;
+}
+body.dark-mode .story-avatar-img,
+body.dark-mode .story-avatar-placeholder {
+    border-color: #262626;
+}
+body.dark-mode .story-avatar-name {
+    color: #ffffff;
+}
+body.dark-mode .story-avatar-placeholder {
+    background-color: #3a3a3a;
+}
+
+/* ============================================
+   Stories Viewer (show.blade.php)
+   ============================================ */
+
+/* Full-screen overlay for the story viewer */
+.story-viewer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Individual story card container */
+.story-viewer-card {
+    position: relative;
+    width: 380px;
+    max-width: 100vw;
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Story progress bars container */
+.story-progress-bars {
+    display: flex;
+    gap: 4px;
+    padding: 8px 10px 4px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+/* Individual progress bar track */
+.story-progress-track {
+    flex: 1;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+/* Progress bar fill (animated via JS) */
+.story-progress-fill {
+    height: 100%;
+    background-color: #ffffff;
+    width: 0%;
+    transition: width linear;
+}
+
+/* Story image */
+.story-viewer-img {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    display: block;
+}
+
+/* Top info overlay (user name, time, close button) */
+.story-viewer-top {
+    position: absolute;
+    top: 28px;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+    color: #ffffff;
+}
+
+/* Bottom controls overlay (like, comment, play/pause) */
+.story-viewer-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    z-index: 10;
+}
+
+/* Left/right tap zones for manual navigation */
+.story-tap-prev,
+.story-tap-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    z-index: 5;
+    cursor: pointer;
+}
+.story-tap-prev { left: 0; }
+.story-tap-next { right: 0; }
+
+/* Sidebar list of story users (positioned to the left of the centered card) */
+.story-users-sidebar {
+    position: fixed;
+    right: calc(50% + 205px);
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9998;
+    max-height: 80vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    padding: 0 8px;
+}
+.story-users-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure comment modal appears above the story viewer overlay (z-index: 9999) */
+/* The backdrop stays at Bootstrap default (1050) and does not need overriding here */
+#commentModal {
+    z-index: 10000 !important;
+}

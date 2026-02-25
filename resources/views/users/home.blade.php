@@ -3,6 +3,11 @@
 @section('title', 'Home')
 
 @section('content')
+    {{-- Stories thumbnail strip (shown when there are active stories from followed users or self) --}}
+    @if($story_users->isNotEmpty())
+        @include('users.stories.thumbnail')
+    @endif
+
     <div class="row gx-5">
         <div class="col-8">
             @forelse ($home_posts as $post)
