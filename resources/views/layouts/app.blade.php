@@ -24,7 +24,7 @@
 
 <body class="bg-white text-dark">
     <div id="app">
-        <nav class="navbar navbar-expand-md shadow-sm bg-white border-bottom">
+        <nav class="navbar navbar-expand-md shadow-sm bg-white border-bottom fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <i class="fa-brands fa-square-instagram insta-icon"></i>
@@ -69,11 +69,19 @@
                                 </a>
                             </li> --}}
 
-                            {{-- Create Post --}}
-                            <li class="nav-item" title="Create Post">
-                                <a href="{{ route('post.create') }}" class="nav-link">
+                            {{-- Create Post / Story Dropdown --}}
+                            <li class="nav-item dropdown" title="Create">
+                                <button class="btn shadow-none nav-link" data-bs-toggle="dropdown">
                                     <i class="fa-solid fa-circle-plus icon-sm text-dark"></i>
-                                </a>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="{{ route('post.create') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-newspaper"></i> Post
+                                    </a>
+                                    <a href="{{ route('story.create') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-circle-play"></i> Story
+                                    </a>
+                                </div>
                             </li>
 
                             {{-- Toggle Theme Button --}}
@@ -142,6 +150,9 @@
                                 <a href="{{ route('admin.categories') }}" class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}">
                                     <i class="fa-solid fa-tags"></i> Categories
                                 </a>
+                                <a href="{{ route('admin.stories') }}" class="list-group-item {{ request()->is('admin/stories') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-circle-play"></i> Stories
+                                </a>
                             </div>
                         </div>
                         
@@ -154,6 +165,8 @@
             </div>
         </main>
     </div>
+
+    @stack('scripts')
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
