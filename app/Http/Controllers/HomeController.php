@@ -32,13 +32,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // $all_posts = $this->post->latest()->get();
-        $home_posts = $this->getHomePosts();
-        $suggested_users = $this->getSuggestedUsers();
+        $home_posts         = $this->getHomePosts();
+        $suggested_users    = $this->getSuggestedUsers();
+        $story_users        = $this->getStoryUsers();
+
         return view('users.home')
-                // ->with('all_posts', $all_posts);
                 ->with('home_posts', $home_posts)
-                ->with('suggested_users', $suggested_users);
+                ->with('suggested_users', $suggested_users)
+                ->with('story_users', $story_users);
     }
 
     #GET THE POSTS OF THE USERS THAT THE SUTH USER IS FOLLOWING
@@ -73,6 +74,25 @@ class HomeController extends Controller
                     }
             }
         return $suggested_users;
+    }
+
+    #Get users with active stories: followed users + auth user, up to 10, sorted by latest story
+    public function getStoryUsers()
+    {
+        $all_users = $this->user->all();
+        $story_users = collect();
+
+        foreach ($all_users as $user) {
+            if ($user->hasActiveStories()) {
+                if ($user->id === Auth::user()->id || $user->isFollowed()) {
+                    $story_users->push($user);
+                }
+            }
+        }
+
+        return $story_users->sortByDesc(function ($user) {
+            return $user->stories()->active()->max('created_at');
+        })->values()->take(10);
     }
 
     public function search(Request $request)

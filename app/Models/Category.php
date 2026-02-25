@@ -12,4 +12,10 @@ class Category extends Model
     {
         return $this->hasMany(CategoryPost::class);
     }
+
+    #Get all story-category pivot records for this category
+    public function categoryStory()
+    {
+        return $this->hasMany(CategoryStory::class);
+    }
 }

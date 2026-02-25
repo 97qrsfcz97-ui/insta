@@ -9,10 +9,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\StoryController;
+use App\Http\Controllers\StoryLikeController;
+use App\Http\Controllers\StoryCommentController;
 #Admin
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\StoriesController;
 #comment 
 #hello
 #good morning
@@ -42,6 +46,11 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('/categories/store', [CategoriesController::class, 'store'])->name('categories.store');
         Route::patch('/categories/{id}/update', [CategoriesController::class, 'update'])->name('categories.update');
         Route::delete('/categories/{id}/destroy', [CategoriesController::class, 'destroy'])->name('categories.destroy');
+
+        #STORY (admin)
+        Route::get('/stories', [StoriesController::class, 'index'])->name('stories');
+        Route::delete("/stories/{id}/hide", [StoriesController::class, "hide"])->name("stories.hide");
+        Route::patch("/stories/{id}/unhide", [StoriesController::class, "unhide"])->name("stories.unhide");
     });
 
     #POST
@@ -75,5 +84,20 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/message/inbox', [MessageController::class, 'inbox'])->name('message.inbox');
     Route::get('/message/{id}', [MessageController::class, 'index'])->name('message.index');
     Route::post('/message/store/{id}', [MessageController::class, 'store'])->name('message.store');
+
+    #STORY
+    Route::get('/story.create', [StoryController::class, 'create'])->name('story.create');
+    Route::post('/story.store', [StoryController::class, 'store'])->name('story.store');
+    Route::get('/story/{user_id}/show', [StoryController::class, 'show'])->name('story.show');
+    Route::post('/story/{story_id}/view', [StoryController::class, 'recordView'])->name('story.view');
+    Route::delete('/story/{id}/destroy', [StoryController::class, 'destroy'])->name('story.destroy');
+
+    #STORY LIKE
+    Route::post('/story-like/{story_id}/store', [StoryLikeController::class, 'store'])->name('story-like.store');
+    Route::delete('/story-like/{story_id}/destroy', [StoryLikeController::class, 'destroy'])->name('story-like.destroy');
+
+    #STORY COMMENT
+    Route::post('/story-comment/{story_id}/store', [StoryCommentController::class, 'store'])->name('story-comment.store');
+    Route::delete('/story-comment/{id}/destroy', [StoryCommentController::class, 'destroy'])->name('story-comment.destroy');
 
 });

@@ -15,9 +15,17 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link d-flex align-items-center gap-1" id="liked-tab" data-bs-toggle="tab" data-bs-target="#liked" type="button" role="tab" aria-selected="false">
-                <i class="fa-regular fa-heart"></i> 
+                <i class="fa-regular fa-heart"></i>
             </button>
         </li>
+        {{-- Stories tab: visible only to the profile owner --}}
+        @if(Auth::user()->id === $user->id)
+            <li class="nav-item" role="presentation">
+                <button class="nav-link d-flex align-items-center gap-1" id="stories-tab" data-bs-toggle="tab" data-bs-target="#stories" type="button" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-circle-play"></i>
+                </button>
+            </li>
+        @endif
     </ul>
 
     <div class="tab-content mt-4" id="profileTabsContent">
@@ -54,5 +62,29 @@
             </div>
         </div>
 
+        {{-- Stories history tab (owner only) --}}
+        @if(Auth::user()->id === $user->id)
+            <div class="tab-pane fade" id="stories" role="tabpanel" aria-labelledby="stories-tab">
+                @include('users.stories.history')
+            </div>
+        @endif
+
     </div>
+
 @endsection
+
+@push('scripts')
+<script>
+    // Auto-activate the Stories tab when the URL contains the story_category query parameter
+    document.addEventListener('DOMContentLoaded', function () {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('story_category')) {
+            const storiesTab = document.getElementById('stories-tab');
+            if (storiesTab) {
+                const tab = new bootstrap.Tab(storiesTab);
+                tab.show();
+            }
+        }
+    });
+</script>
+@endpush

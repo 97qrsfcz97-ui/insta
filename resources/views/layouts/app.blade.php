@@ -29,6 +29,27 @@
                     </a>
                 </li>
 
+                             {{-- DM Post --}}
+                            {{-- <li class="nav-item" title="DM">
+                                <a href="{{ route('post.dm') }}" class="nav-link">
+                                    <i class="fa-solid fa-circle-plus icon-sm text-dark"></i>
+                                </a>
+                            </li> --}}
+
+                            {{-- Create Post / Story Dropdown --}}
+                            <li class="nav-item dropdown" title="Create">
+                                <button class="btn shadow-none nav-link" data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-circle-plus icon-sm text-dark"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="{{ route('post.create') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-newspaper"></i> Post
+                                    </a>
+                                    <a href="{{ route('story.create') }}" class="dropdown-item">
+                                        <i class="fa-solid fa-circle-play"></i> Story
+                                    </a>
+                                </div>
+                            </li>
                 <li class="nav-item">
                     <a href="{{ route('search') }}" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" title="Search">
                         <i class="fa-solid fa-magnifying-glass fa-fw fs-4 me-3"></i> 
@@ -120,12 +141,40 @@
                                 @yield('content')
                             </div>
                         @endif
+        <main class="py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    {{-- Admin Menu(col-3) --}}
+                    @if (request()->is('admin/*'))
+                        <div class="col-3">
+                            <div class="list-group">
+                                <a href="{{ route('admin.users') }}" class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-users"></i> Users
+                                </a>
+                                <a href="{{ route('admin.posts') }}" class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-newspaper"></i> Posts
+                                </a>
+                                <a href="{{ route('admin.categories') }}" class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-tags"></i> Categories
+                                </a>
+                                <a href="{{ route('admin.stories') }}" class="list-group-item {{ request()->is('admin/stories') ? 'active' : '' }}">
+                                    <i class="fa-solid fa-circle-play"></i> Stories
+                                </a>
+                            </div>
+                        </div>
+                        
+                    @endif
+
+                    <div class="col-9">
+                        @yield('content')
                     </div>
                 </div>
             </div>
         </main>
         
     </div>
+
+    @stack('scripts')
 
     <script>
         const toggleBtn = document.getElementById('theme-toggle');
