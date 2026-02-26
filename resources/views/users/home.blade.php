@@ -4,11 +4,25 @@
 
 @section('content')
     {{-- Stories thumbnail strip (shown when there are active stories from followed users or self) --}}
-    @if($story_users->isNotEmpty())
+    <div class="row gx-5">
+        <div class="col-1">
+
+        </div>
+        <div class="col-8">
+             @if($story_users->isNotEmpty())
         @include('users.stories.thumbnail')
     @endif
+        </div>
+        <div class="col-3">
+            
+        </div>
+    </div>
+   
 
     <div class="row gx-5">
+        <div class="col-1">
+
+        </div>
         <div class="col-8">
             @forelse ($home_posts as $post)
                 <div class="card mb-4">
@@ -26,25 +40,8 @@
             @endforelse
             
         </div>
-        <div class="col-4">
-            <div class="row align-items-center mb-5 bg-white shadow-sm rounded-3 py-3">
-                <div class="col-auto">
-                    <a href="{{ route('profile.show', Auth::user()->id) }}">
-                        @if (Auth::user()->avatar)
-                        <img src="{{ Auth::user()->avatar }}" alt="{{ Auth::user()->name }}" class="rounded-circle avatar-md">
-                            
-                        @else
-                            <i class="fa-solid fa-circle-user text-secondary icon-md"></i>
-                        @endif
-                    </a>
-                </div>
-                <div class="col ps-0">
-                    <a href="{{ route('profile.show', Auth::user()->id) }}" class="text-decoration-none text-dark fw-bold">
-                        {{ Auth::user()->name }}
-                    </a>
-                    <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
-                </div>
-            </div>
+        <div class="col-3">
+           
 
             {{-- SUGGESTIONS --}}
             @if ($suggested_users)

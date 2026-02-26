@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/sass/app.scss', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
 </head>
 
 <body class="bg-white text-dark">
@@ -29,27 +29,6 @@
                     </a>
                 </li>
 
-                             {{-- DM Post --}}
-                            {{-- <li class="nav-item" title="DM">
-                                <a href="{{ route('post.dm') }}" class="nav-link">
-                                    <i class="fa-solid fa-circle-plus icon-sm text-dark"></i>
-                                </a>
-                            </li> --}}
-
-                            {{-- Create Post / Story Dropdown --}}
-                            <li class="nav-item dropdown" title="Create">
-                                <button class="btn shadow-none nav-link" data-bs-toggle="dropdown">
-                                    <i class="fa-solid fa-circle-plus icon-sm text-dark"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="{{ route('post.create') }}" class="dropdown-item">
-                                        <i class="fa-solid fa-newspaper"></i> Post
-                                    </a>
-                                    <a href="{{ route('story.create') }}" class="dropdown-item">
-                                        <i class="fa-solid fa-circle-play"></i> Story
-                                    </a>
-                                </div>
-                            </li>
                 <li class="nav-item">
                     <a href="{{ route('search') }}" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" title="Search">
                         <i class="fa-solid fa-magnifying-glass fa-fw fs-4 me-3"></i> 
@@ -59,16 +38,28 @@
 
                 <li class="nav-item">
                     <a href="{{ route('message.inbox') }}" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" title="Messages">
-                        <i class="fa-brands fa-facebook-messenger fa-fw fs-4 me-3"></i> 
+                        <i class="fa-regular fa-message fa-fw fs-4 me-3"></i> 
                         <span class="fs-6">Messages</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('post.create') }}" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" title="Create">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" id="createDropdown" data-bs-toggle="dropdown" aria-expanded="false" title="Create">
                         <i class="fa-regular fa-square-plus fa-fw fs-4 me-3"></i> 
                         <span class="fs-6">Create</span>
                     </a>
+                    <ul class="dropdown-menu sidebar-dropdown text-small shadow border-0" aria-labelledby="createDropdown">
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ route('post.create') }}">
+                                <i class="fa-solid fa-newspaper me-2"></i> Post
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item py-2" href="{{ route('story.create') }}">
+                                <i class="fa-solid fa-circle-play me-2"></i> Story
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">
@@ -86,7 +77,7 @@
             <div class="dropdown mt-auto">
                 <a href="#" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" id="dropdownMore" data-bs-toggle="dropdown" aria-expanded="false" title="More">
                     <i class="fa-solid fa-bars fa-fw fs-4 me-3"></i> 
-                    <span class="fs-6"></span>
+                    <span class="fs-6">More</span>
                 </a>
                 <ul class="dropdown-menu sidebar-dropdown text-small shadow border-0" aria-labelledby="dropdownMore">
                     <li>
@@ -116,8 +107,8 @@
         @endauth
 
         <main class="flex-grow-1 main-content">
-            <div class="py-5">
-                <div class="container">
+            <div class="pt-0 py-5">
+                <div class="container pt-3">
                     <div class="row justify-content-center">
                         @if (request()->is('admin/*'))
                             <div class="col-3">
@@ -131,6 +122,9 @@
                                     <a href="{{ route('admin.categories') }}" class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}">
                                         <i class="fa-solid fa-tags"></i> Categories
                                     </a>
+                                    <a href="{{ route('admin.stories') }}" class="list-group-item {{ request()->is('admin/stories') ? 'active' : '' }}">
+                                        <i class="fa-solid fa-circle-play"></i> Stories
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-9">
@@ -141,32 +135,6 @@
                                 @yield('content')
                             </div>
                         @endif
-        <main class="py-4">
-            <div class="container">
-                <div class="row justify-content-center">
-                    {{-- Admin Menu(col-3) --}}
-                    @if (request()->is('admin/*'))
-                        <div class="col-3">
-                            <div class="list-group">
-                                <a href="{{ route('admin.users') }}" class="list-group-item {{ request()->is('admin/users') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-users"></i> Users
-                                </a>
-                                <a href="{{ route('admin.posts') }}" class="list-group-item {{ request()->is('admin/posts') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-newspaper"></i> Posts
-                                </a>
-                                <a href="{{ route('admin.categories') }}" class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-tags"></i> Categories
-                                </a>
-                                <a href="{{ route('admin.stories') }}" class="list-group-item {{ request()->is('admin/stories') ? 'active' : '' }}">
-                                    <i class="fa-solid fa-circle-play"></i> Stories
-                                </a>
-                            </div>
-                        </div>
-                        
-                    @endif
-
-                    <div class="col-9">
-                        @yield('content')
                     </div>
                 </div>
             </div>
