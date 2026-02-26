@@ -34,7 +34,7 @@
             <div class="col-auto">
                 <a href="{{ route('profile.show', $user->id) }}" class="text-decoration-none text-dark">
                     <strong>{{ $user->posts->count() }}</strong>
-                    @if ($user->posts->count() === 1 )
+                    @if ($user->posts->count() === 0 )
                         post
                     @else
                         posts
@@ -44,7 +44,7 @@
             <div class="col-auto">
                 <a href="{{ route('profile.followers', $user->id) }}" class="text-decoration-none text-dark">
                     <strong>{{ $user->followers->count() }}</strong>
-                    @if ($user->followers->count() === 1 )
+                    @if ($user->followers->count() === 0 )
                         follower
                     @else
                         followers

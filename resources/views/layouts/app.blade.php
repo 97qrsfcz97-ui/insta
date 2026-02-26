@@ -24,7 +24,7 @@
             <ul class="nav flex-column gap-1 mb-auto">
                 <li class="nav-item">
                     <a href="{{ route('index') }}" class="nav-link text-dark p-3 sidebar-link d-flex align-items-center" title="Home">
-                        <i class="fa-solid fa-house fa-fw fs-4 me-3"></i> 
+                        <i class="fa-solid fa-house fa-fw fs-4 me-3"></i>
                         <span class="fs-6">Home</span>
                     </a>
                 </li>
