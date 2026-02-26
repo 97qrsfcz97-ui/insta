@@ -2,6 +2,16 @@
 {{-- Unviewed stories show a gradient ring; viewed stories show a gray ring --}}
 <div class="d-flex overflow-auto pb-3 mb-3 story-thumbnail-strip gap-3 align-items-center">
 
+    <a href="{{ route('story.create') }}" class="text-decoration-none text-center story-avatar-item">
+        <div class="story-ring-create">
+            <div class="story-avatar-placeholder rounded-circle d-flex align-items-center justify-content-center">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+        <div class="story-avatar-name small mt-1 text-truncate" style="max-width: 70px;">
+            <p></p>
+        </div>
+    </a>
     @foreach($story_users as $story_user)
         @php
             // Check if all active stories for this user have been viewed by the auth user
