@@ -9,9 +9,7 @@
 
         </div>
         <div class="col-8">
-             @if($story_users->isNotEmpty())
-        @include('users.stories.thumbnail')
-    @endif
+            @include('users.stories.thumbnail')
         </div>
         <div class="col-3">
 
