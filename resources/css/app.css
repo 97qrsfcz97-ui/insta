@@ -12,6 +12,11 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+body
+{
+    padding-top: 20px;
+}
+
 /* instagram logo  */
 .logo-font 
 {

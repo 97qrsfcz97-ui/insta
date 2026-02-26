@@ -22,6 +22,9 @@ class MessageController extends Controller
         $receiver = User::findOrFail($id);
         $user_id = Auth::id(); 
 
+        $following_ids = Auth::user()->following->pluck('following_id');
+        $following_users = User::whereIn('id', $following_ids)->get();
+
         $messages = Message::where(function($query) use ($user_id, $id) 
         {
             $query->where('sender_id', $user_id)->where('receiver_id', $id);
@@ -30,7 +33,7 @@ class MessageController extends Controller
             $query->where('sender_id', $id)->where('receiver_id', $user_id);
         })->orderBy('created_at', 'asc')->get();
 
-        return view('messages.index', compact('messages', 'receiver'));
+        return view('messages.index', compact('messages', 'receiver', 'following_users'));
     }
 
     public function store(Request $request, $id)
